@@ -30,6 +30,6 @@ vector<Car> Parser::readCSV(const string& fileName) {
 }
 
 void Parser::parseInput() {
-    cout << "Hello world!" << endl;
+    cout << "Hello World!" << endl;
     readCSV("Car_data.csv");
 }
