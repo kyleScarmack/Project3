@@ -1,0 +1,3 @@
+/Users/kylescarmack/CLionProjects/Project3Collaborative/cmake-build-debug/CMakeFiles/Project3.dir
+/Users/kylescarmack/CLionProjects/Project3Collaborative/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/kylescarmack/CLionProjects/Project3Collaborative/cmake-build-debug/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,18 @@
+# ninja log v5
+1	47	1732848642162798567	build.ninja	cac9d4ec6027f082
+1	309	1732848832321546505	CMakeFiles/Project3.dir/main.cpp.o	e3e4a905c0833d8b
+7	298	1732848865419511893	CMakeFiles/Project3.dir/Kyle.cpp.o	8a351580c78c4685
+6	292	1732848944239901967	CMakeFiles/Project3.dir/main.cpp.o	e3e4a905c0833d8b
+6	348	1732848944295722754	CMakeFiles/Project3.dir/Car.cpp.o	df4f7b8f06de045e
+6	291	1732849166550335160	CMakeFiles/Project3.dir/main.cpp.o	e3e4a905c0833d8b
+5	289	1732849202358797868	CMakeFiles/Project3.dir/main.cpp.o	e3e4a905c0833d8b
+5	346	1732849202416246688	CMakeFiles/Project3.dir/Car.cpp.o	df4f7b8f06de045e
+4	297	1732849239269249706	CMakeFiles/Project3.dir/main.cpp.o	e3e4a905c0833d8b
+5	350	1732849239322581128	CMakeFiles/Project3.dir/Car.cpp.o	df4f7b8f06de045e
+4	397	1732849464209653003	CMakeFiles/Project3.dir/main.cpp.o	e3e4a905c0833d8b
+4	369	1732849619939551843	CMakeFiles/Project3.dir/main.cpp.o	e3e4a905c0833d8b
+5	388	1732849619959436919	CMakeFiles/Project3.dir/Car.cpp.o	df4f7b8f06de045e
+6	384	1732849727499941254	CMakeFiles/Project3.dir/main.cpp.o	e3e4a905c0833d8b
+7	398	1732849727515185908	CMakeFiles/Project3.dir/Car.cpp.o	df4f7b8f06de045e
+7	452	1732849727568153859	CMakeFiles/Project3.dir/Parser.cpp.o	2402b5bc197b1b53
+452	496	1732849727614710078	Project3	3e0d23a62c6cb9a4
