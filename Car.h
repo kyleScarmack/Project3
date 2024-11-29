@@ -9,9 +9,9 @@ struct Car {
     int year;
     string color;
     int mileage;
-    double price;
+    int price;
     string condition;
 
     static Car addCar(const string& line);
-    void printCar(Car& car);
+    void printCar();
 };

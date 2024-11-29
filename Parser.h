@@ -1,9 +1,10 @@
+#pragma once
 #include <iostream>
 #include <vector>
 #include "Car.h"
 using namespace std;
 
 struct Parser {
-    vector<Car> readCSV(const string& fileName);
+    int readCSV(const string& fileName, Car cars[]);
     void parseInput();
 };

@@ -4,7 +4,6 @@
 #include <string>
 using namespace std;
 
-// Function to parse a single line of the CSV and create a Car object
 Car Car::addCar(const string& line) {
     Car car;
     stringstream ss(line);
@@ -26,20 +25,19 @@ Car Car::addCar(const string& line) {
     car.mileage = stoi(mileage);
 
     getline(ss, price, ',');
-    car.price = stod(price);
+    car.price = stoi(price);
 
     getline(ss, car.condition, ',');
 
     return car;
 }
 
-void Car::printCar(Car& car) {
-    cout << "Here is your car!" << endl;
-    cout << "ID: " << car.id << endl;
-    cout << "Brand: " << car.brand << endl;
-    cout << "Model: " << car.model << endl;
-    cout << "Year: " << car.year << endl;
-    cout << "Mileage: " << car.mileage << " miles" << endl;
-    cout << "Price: $" << car.price << endl;
-    cout << "Condition: $" << car.condition << endl;
+void Car::printCar() {
+    cout << "ID: " << id << endl;
+    cout << "Brand: " << brand << endl;
+    cout << "Model: " << model << endl;
+    cout << "Year: " << year << endl;
+    cout << "Mileage: " << mileage << " miles" << endl;
+    cout << "Price: $" << price << endl;
+    cout << "Condition: " << condition;
 }
