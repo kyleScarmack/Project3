@@ -68,13 +68,11 @@ void Parser::parseInput() {
             cin >> searchID;
             cout << endl;
 
-            Car* foundCar = kyle.binarySearch(cars, numCars, searchID);
-
-            if (foundCar != nullptr) {
+            if (searchID > 0 && searchID <= numCars) {
                 cout << "Car found! Here is your car!" << endl;
                 cout << endl;
                 cout << "----------------------------------------" << endl;
-                foundCar->printCar();
+                cars[searchID - 1].printCar();
                 cout << "----------------------------------------" << endl;
             } else {
                 cout << "Car with ID " << searchID << " not found in the dealership." << endl;

@@ -2,9 +2,10 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <algorithm>
 using namespace std;
 
-Car Car::addCar(const string& line) {
+Car Car::addCar(string line) {
     Car car;
     stringstream ss(line);
     string id, year, mileage, price;
@@ -28,6 +29,7 @@ Car Car::addCar(const string& line) {
     car.price = stoi(price);
 
     getline(ss, car.condition, ',');
+    car.condition.erase(remove_if(car.condition.begin(), car.condition.end(), ::isspace), car.condition.end());
 
     return car;
 }
@@ -37,7 +39,8 @@ void Car::printCar() {
     cout << "Brand: " << brand << endl;
     cout << "Model: " << model << endl;
     cout << "Year: " << year << endl;
+    cout << "Color: " << color << endl;
     cout << "Mileage: " << mileage << " miles" << endl;
     cout << "Price: $" << price << endl;
-    cout << "Condition: " << condition;
+    cout << "Condition: " << condition << endl;
 }

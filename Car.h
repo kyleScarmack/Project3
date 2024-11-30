@@ -12,6 +12,6 @@ struct Car {
     int price;
     string condition;
 
-    static Car addCar(const string& line);
+    static Car addCar(string line);
     void printCar();
 };
