@@ -48,6 +48,12 @@ void Parser::parseInput() {
 
     switch (input) {
         case 1:
+            cout << "Enter the car ID to search: ";
+
+            int searchID;
+            cin >> searchID;
+            cout << endl;
+
             cout << "Sorting cars using merge sort..." << endl;
 
             auto startTime = chrono::high_resolution_clock::now();
@@ -55,18 +61,7 @@ void Parser::parseInput() {
             Kyle kyle;
             kyle.mergeSort(cars, 0, numCars - 1);
 
-            auto endTime = chrono::high_resolution_clock::now();
-            chrono::duration<double> elapsedTime = endTime - startTime;
-
             cout << "Cars sorted successfully!" << endl;
-            cout << "Time taken: " << elapsedTime.count() << " seconds" << endl;
-
-            cout << endl;
-            cout << "Enter the car ID to search: ";
-
-            int searchID;
-            cin >> searchID;
-            cout << endl;
 
             if (searchID > 0 && searchID <= numCars) {
                 cout << "Car found! Here is your car!" << endl;
@@ -77,6 +72,9 @@ void Parser::parseInput() {
             } else {
                 cout << "Car with ID " << searchID << " not found in the dealership." << endl;
             }
+            auto endTime = chrono::high_resolution_clock::now();
+            chrono::duration<double> elapsedTime = endTime - startTime;
+            cout << "Time taken: " << elapsedTime.count() << " seconds" << endl;
             break;
         // case 2:
             // add functions correlating to min/max heap output
