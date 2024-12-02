@@ -53,16 +53,16 @@ void Parser::parseInput() {
         case 1: {
             cout << "Sorting cars using merge sort..." << endl;
 
-            auto startTime = chrono::high_resolution_clock::now();
+            auto mergeSortStartTime = chrono::high_resolution_clock::now();
 
             Kyle kyle;
             kyle.mergeSort(cars, 0, numCars - 1);
 
-            auto endTime = chrono::high_resolution_clock::now();
-            chrono::duration<double> elapsedTime = endTime - startTime;
+            auto mergeSortEndTime = chrono::high_resolution_clock::now();
+            chrono::duration<double> mergeSortElapsedTime = mergeSortEndTime - mergeSortStartTime;
 
             cout << "Cars sorted successfully!" << endl;
-            cout << "Time taken: " << elapsedTime.count() << " seconds" << endl;
+            cout << "Time taken to merge sort: " << mergeSortElapsedTime.count() << " seconds" << endl;
 
             cout << endl;
             cout << "Enter the car ID to search: ";
@@ -73,8 +73,13 @@ void Parser::parseInput() {
             if (searchID > 0 && searchID <= numCars) {
                 cout << "Car found! Here is your car!" << endl;
                 cout << "----------------------------------------" << endl;
-                cars[searchID - 1].printCar();
+                auto searchStartTime = chrono::high_resolution_clock::now();
+                Car foundCar = cars[searchID - 1];
+                auto searchEndTime = chrono::high_resolution_clock::now();
+                chrono::duration<double> searchElapsedTime = searchEndTime - searchStartTime;
+                foundCar.printCar();
                 cout << "----------------------------------------" << endl;
+                cout << "Time taken to access car: " << (searchElapsedTime.count() * 1000000) << " seconds" << endl;
             } else {
                 cout << "Car with ID " << searchID << " not found in the dealership." << endl;
             }
