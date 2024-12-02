@@ -5,19 +5,24 @@
 #include <vector>
 using namespace std;
 
+// Min-Heap class for closeness calculation
 class MinHeap {
 private:
-    vector<Car> heap;
-
+    std::vector<std::pair<float, Car>> heap;
     void heapifyUp(int index);
     void heapifyDown(int index);
 
 public:
-    MinHeap() = default;
-    void insert(const Car& car);
-    Car extractMin();
+    void push(float score, Car car);
+    Car pop();
     bool isEmpty() const;
-    bool searchByID(int id, Car& foundCar) const;
 };
+
+// Function prototypes
+void mergeSort(std::vector<Car>& cars, int left, int right);
+void merge(std::vector<Car>& cars, int left, int mid, int right);
+
+std::vector<Car> readCarsFromCSV(const std::string& filePath);
+float calculateCloseness(const Car& inputCar, const Car& car);
 
 #endif //PROJECT3_BROCK_H

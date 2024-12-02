@@ -12,4 +12,5 @@ add_executable(Project3 main.cpp
         Parser.cpp
         Parser.cpp
         Brock.cpp
-        Brock.h)
+        Brock.h
+        map.cpp)
