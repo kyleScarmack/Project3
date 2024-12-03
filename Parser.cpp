@@ -70,7 +70,7 @@ void Parser::parseInput() {
                 cout << "Time taken to merge sort: " << mergeSortElapsedTime.count() << " seconds" << endl;
 
                 cout << endl;
-                cout << "Enter the car ID to search: ";
+                cout << "Enter the car ID to search (1 - 100000): ";
                 int searchID;
                 cin >> searchID;
                 cout << endl;
@@ -91,22 +91,23 @@ void Parser::parseInput() {
                 break;
             }
             case 2: {
+                cout << "Building min heap of cars..." << endl;
                 auto heapBuildStartTime = std::chrono::high_resolution_clock::now();
 
                 MinHeap heap;
+                Car inputCar;
 
+                // init heap
                 for (int i = 0; i < numCars; ++i) {
-                    float score = 0.0; // Initialize score to zero; scores will be calculated later
+                    float score = calculateCloseness(inputCar, cars[i]);
                     heap.push(score, cars[i]);
                 }
 
                 auto heapBuildEndTime = std::chrono::high_resolution_clock::now();
                 std::chrono::duration<double> heapBuildElapsedTime = heapBuildEndTime - heapBuildStartTime;
 
-                std::cout << "Heap built successfully!" << std::endl;
-                std::cout << "Time taken to build heap: " << heapBuildElapsedTime.count() << " seconds\n" << std::endl;
-
-                Car inputCar;
+                std::cout << "Min heap built successfully!" << std::endl;
+                std::cout << "Time taken to build min heap: " << heapBuildElapsedTime.count() << " seconds\n" << std::endl;
                 std::cout << "Enter Brand (Volvo, Honda, Ford, etc): ";
                 std::cin.ignore(); // Clear the input buffer
                 std::getline(std::cin, inputCar.brand);
@@ -117,7 +118,7 @@ void Parser::parseInput() {
                 std::cout << "Enter Color (White, Blue, etc): ";
                 std::cin.ignore();
                 std::getline(std::cin, inputCar.color);
-                std::cout << "Enter Mileage (2 199998): ";
+                std::cout << "Enter Mileage (2 - 199998): ";
                 std::cin >> inputCar.mileage;
                 std::cout << "Enter Price (5000 - 80000): $";
                 std::cin >> inputCar.price;
@@ -142,36 +143,37 @@ void Parser::parseInput() {
                 std::cout << "----------------------------------------\n";
                 closestCar.printCar();
                 std::cout << "----------------------------------------\n";
-                std::cout << "Execution time: " << elapsed.count() << " seconds\n";
+                std::cout << "Time taken to find car: " << elapsed.count() << " seconds\n";
                 break;
             }
 
             case 3: {
 
-                std::cout << "Select A Category To Search By: \n";
-                std::cout << "----------------------------------------\n";
-                std::cout << "(1) - Id \n";
-                std::cout << "(2) - Brand \n";
-                std::cout << "(3) - Model \n";
-                std::cout << "(4) - Year \n";
-                std::cout << "(5) - Color \n";
-                std::cout << "(6) - Mileage \n";
-                std::cout << "(7) - Price \n";
-                std::cout << "(8) - Condition \n";
+                std::cout << "Select a category to search by: \n";
+                std::cout << "1. ID \n";
+                std::cout << "2. Brand \n";
+                std::cout << "3. Model \n";
+                std::cout << "4. Year \n";
+                std::cout << "5. Color \n";
+                std::cout << "6. Mileage \n";
+                std::cout << "7. Price \n";
+                std::cout << "8. Condition \n";
 
                 int choice;
+                std::cout << "\nEnter your choice (1-8): ";
                 std::cin >> choice;
 
                 if (choice == 1) {
 
                     std::cout << "Enter the Car ID to Search: \n";
+                    std::cout << "Enter the car ID to search: ";
                     int searchID;
                     std::cin >> searchID;
 
                     try {
                         auto startTime = std::chrono::high_resolution_clock::now();
 
-                        std::cout << "Creating Map..." << std::endl;
+                        std::cout << "Creating map..." << std::endl;
 
                         DSA::Map<int, Car> carMap;
                         for (int i = 0; i < numCars; ++i) {
@@ -180,10 +182,12 @@ void Parser::parseInput() {
 
                         std::cout << "Success! Map Created!\n\n";
 
+                        std::cout << "Success! Map created!" << std::endl;
+
                         Car foundCar = carMap.at(searchID);
                         auto endTime = std::chrono::high_resolution_clock::now();
 
-                        std::cout << "Car found! Here are the details:\n";
+                        std::cout << "Car found! Here is your car!\n";
                         std::cout << "----------------------------------------\n";
                         foundCar.printCar();
                         std::cout << "----------------------------------------\n";
@@ -250,7 +254,7 @@ void Parser::parseInput() {
 
                     std::chrono::duration<double> elapsed = endTime - startTime;
                     std::cout << "Time Taken to Search For Cars: " << elapsed.count() << " seconds\n";
-
+                    std::cout << "Search time: " << elapsed.count() << " seconds\n";
                 }
                 else if (choice == 3) {
                     std::cout << "Enter the Model to Search: ";
@@ -304,7 +308,7 @@ void Parser::parseInput() {
 
                     std::chrono::duration<double> elapsed = endTime - startTime;
                     std::cout << "Time Taken to Search For Cars: " << elapsed.count() << " seconds\n";
-
+                    std::cout << "Search time: " << elapsed.count() << " seconds\n";
                 }
                 else if (choice == 4) {
                     std::cout << "Enter the Year to Search: ";
@@ -356,6 +360,7 @@ void Parser::parseInput() {
 
                     std::chrono::duration<double> elapsed = endTime - startTime;
                     std::cout << "Time Taken to Search For Cars: " << elapsed.count() << " seconds\n";
+                    std::cout << "Search time: " << elapsed.count() << " seconds\n";
                 }
                 else if (choice == 5) {
                     std::cout << "Enter the Color to Search: ";
@@ -409,6 +414,7 @@ void Parser::parseInput() {
 
                     std::chrono::duration<double> elapsed = endTime - startTime;
                     std::cout << "Time Taken to Search For Cars: " << elapsed.count() << " seconds\n";
+                    std::cout << "Search time: " << elapsed.count() << " seconds\n";
                 }
                 else if (choice == 6) {
                     std::cout << "Enter the Mileage to Search: ";
@@ -460,6 +466,7 @@ void Parser::parseInput() {
 
                     std::chrono::duration<double> elapsed = endTime - startTime;
                     std::cout << "Time Taken to Search For Cars: " << elapsed.count() << " seconds\n";
+                    std::cout << "Search time: " << elapsed.count() << " seconds\n";
                 }
                 else if (choice == 7) {
                     std::cout << "Enter the Price to Search: ";
@@ -496,7 +503,7 @@ void Parser::parseInput() {
                             if (count <= 10) {
                                 std::cout << "Car found! Here are the details:\n";
                                 std::cout << "----------------------------------------\n";
-                                it->second.printCar();
+                                it->second  .printCar();
                                 std::cout << "----------------------------------------\n";
                             }
                         }
@@ -511,6 +518,7 @@ void Parser::parseInput() {
 
                     std::chrono::duration<double> elapsed = endTime - startTime;
                     std::cout << "Time Taken to Search For Cars: " << elapsed.count() << " seconds\n";
+                    std::cout << "Search time: " << elapsed.count() << " seconds\n";
                 }
                 else if (choice == 8) {
                     std::cout << "Enter the Condition to Search (New/Old): ";
@@ -564,6 +572,7 @@ void Parser::parseInput() {
 
                     std::chrono::duration<double> elapsed = endTime - startTime;
                     std::cout << "Time Taken to Search For Cars: " << elapsed.count() << " seconds\n";
+                    std::cout << "Search time: " << elapsed.count() << " seconds\n";
                 }
                 else {
                     std::cout << "Invalid Option. Please Try Again." << std::endl;
