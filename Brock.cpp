@@ -2,10 +2,14 @@
 #include <stdexcept>
 #include <cmath>
 
-// inspired by Aman
-// TODO: add slides
+// inspired by
+// Aman's Heaps slides
+// Discussion 6 - Heaps & Priority Queues
+// and 7.1 Extract Max, Heaps programming quiz
+// all of which had heapify examples and extraction
 
 // Min-Heap methods
+// heapify up function
 void MinHeap::heapifyUp(int index) {
     while (index > 0 && heap[(index - 1) / 2].first > heap[index].first) {
         std::swap(heap[(index - 1) / 2], heap[index]);
@@ -13,6 +17,7 @@ void MinHeap::heapifyUp(int index) {
     }
 }
 
+// heapify down function
 void MinHeap::heapifyDown(int index) {
     int size = heap.size();
     int smallest = index;
@@ -31,6 +36,9 @@ void MinHeap::heapifyDown(int index) {
     }
 }
 
+// calculate closeness function with weights being high for
+// brand, model, year for priority
+// and small weights for mileage and price
 float calculateCloseness(const Car& inputCar, const Car& car) {
     // define weights for different attributes
     const float brandMismatchPenalty = 10000.0f;
@@ -57,11 +65,13 @@ float calculateCloseness(const Car& inputCar, const Car& car) {
     return score;
 }
 
+// push function
 void MinHeap::push(float score, Car car) {
     heap.push_back({score, car});
     heapifyUp(heap.size() - 1);
 }
 
+// pop function
 Car MinHeap::pop() {
     if (heap.empty()) {
         throw std::runtime_error("Heap is empty");
@@ -71,8 +81,4 @@ Car MinHeap::pop() {
     heap.pop_back();
     heapifyDown(0);
     return topCar;
-}
-
-bool MinHeap::isEmpty() const {
-    return heap.empty();
 }
