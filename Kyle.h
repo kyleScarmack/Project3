@@ -3,7 +3,9 @@
 #include "Car.h"
 using namespace std;
 
-struct Kyle {
-    void mergeSort(Car arr[], int start, int end);
+// Kyle class for merge sort, sorting by ID
+class Kyle {
     void merge(Car arr[], int left, int mid, int right);
+public:
+    void mergeSort(Car arr[], int start, int end);
 };

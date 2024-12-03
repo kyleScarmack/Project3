@@ -5,6 +5,7 @@
 #include <algorithm>
 using namespace std;
 
+// Parses a CSV file and creates a Car object
 Car Car::addCar(string line) {
     Car car;
     stringstream ss(line);
@@ -29,11 +30,13 @@ Car Car::addCar(string line) {
     car.price = stoi(price);
 
     getline(ss, car.condition, ',');
+    // Remove extra whitespace that creates problems when reading in car condition
     car.condition.erase(remove_if(car.condition.begin(), car.condition.end(), ::isspace), car.condition.end());
 
     return car;
 }
 
+// Print out details of requested/found Car
 void Car::printCar() {
     cout << "ID: " << id << endl;
     cout << "Brand: " << brand << endl;
