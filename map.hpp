@@ -5,6 +5,7 @@
 #include <iostream>
 #include <stack>
 #include <utility>
+#include "Car.h"
 
 #define BLACK nullptr
 
@@ -61,7 +62,7 @@ namespace DSA
         // Helper Function For Destructor; Aids In Post-Order Traversal.
         void DestructorHelper(Node *node);
         // Helper Function That Searches For And Returns The Node Of A Given Key.
-        Node* FindHelper(Node*& node, const Key_T& key);
+        Node* FindHelper(Node*& node, const Key_T& key) const;
         // Helper Function For Insert Function.
         void InsertHelper(Node*& nodeRoot, Node*& node, Node* parent);
         // Performs A Left Rotation Around A Particular Node.
@@ -74,8 +75,6 @@ namespace DSA
          * "Red-Black Tree Insertions, Performance, and Use Cases" (12:12 - 13:20)
          */
         void Balance(Node* node);
-        // Helper Function
-        void PrintHelper(Node *node) const;
 
     public:
         // Constructor For Map Class.
@@ -90,13 +89,11 @@ namespace DSA
         // Method That Returns The Number Of Nodes In The Red-Black Tree.
         size_t size() const noexcept;
         // Method That Returns The Number Of Nodes Of A Particular Key; Can Either Be 1 Or 0.
-        size_t count(const Key_T& key) const;
+        size_t count(const Key_T& key);
         // Method That Inserts A Key-Value Pair Into The Map.
         void insert(const Key_T& key, const Value_T& value);
         // Method That Returns The Value Of A Particular Key In The Map. Throws An Exception If Key Does Not Exist.
         Value_T& at(const Key_T& key);
-        // Method That Prints The Nodes Of The Red-Black Tree InOrder.
-        void printInOrder() const;
 
     public:
         // Iterator Class For Iterating Over The Red-Black Tree.

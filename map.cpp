@@ -45,7 +45,7 @@ void DSA::Map<Key_T, Value_T>::DestructorHelper(typename DSA::Map<Key_T, Value_T
 
 template<typename Key_T, typename Value_T>
 typename DSA::Map<Key_T, Value_T>::Node*
-DSA::Map<Key_T, Value_T>::FindHelper(typename DSA::Map<Key_T, Value_T>::Node*& node, const Key_T& key) {
+DSA::Map<Key_T, Value_T>::FindHelper(typename DSA::Map<Key_T, Value_T>::Node*& node, const Key_T& key) const {
     if (node == nullptr)
         return nullptr;
     if (node->key == key)
@@ -167,15 +167,6 @@ void DSA::Map<Key_T, Value_T>::Balance(typename DSA::Map<Key_T, Value_T>::Node *
 }
 
 template<typename Key_T, typename Value_T>
-void DSA::Map<Key_T, Value_T>::PrintHelper(typename DSA::Map<Key_T, Value_T>::Node* node) const {
-    if (node == nullptr)
-        return;
-    PrintHelper(node->left);
-    std::cout << node->key << ": " << node->value << ", ";
-    PrintHelper(node->right);
-}
-
-template<typename Key_T, typename Value_T>
 DSA::Map<Key_T, Value_T>::Map() : root(nullptr), nodeCount(0) {}
 
 template<typename Key_T, typename Value_T>
@@ -195,7 +186,7 @@ template<typename Key_T, typename Value_T>
 size_t DSA::Map<Key_T, Value_T>::size() const noexcept { return this->nodeCount; }
 
 template<typename Key_T, typename Value_T>
-size_t DSA::Map<Key_T, Value_T>::count(const Key_T& key) const
+size_t DSA::Map<Key_T, Value_T>::count(const Key_T& key)
 { return (FindHelper(root, key) != nullptr) ? 1 : 0; }
 
 template<typename Key_T, typename Value_T>
@@ -212,12 +203,6 @@ Value_T& DSA::Map<Key_T, Value_T>::at(const Key_T& key) {
     if (node == nullptr)
         throw std::out_of_range("Key Does Not Exist In Map");
     return node->value;
-}
-
-template<typename Key_T, typename Value_T>
-void DSA::Map<Key_T, Value_T>::printInOrder() const {
-    PrintHelper(root);
-    std::cout << std::endl;
 }
 
 template<typename Key_T, typename Value_T>
@@ -281,3 +266,6 @@ typename DSA::Map<Key_T, Value_T>::Iterator DSA::Map<Key_T, Value_T>::begin() { 
 
 template<typename Key_T, typename Value_T>
 typename DSA::Map<Key_T, Value_T>::Iterator DSA::Map<Key_T, Value_T>::end() { return Iterator(); }
+
+template class DSA::Map<int, Car>;
+template class DSA::Map<std::string, Car>;
