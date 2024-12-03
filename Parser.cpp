@@ -120,6 +120,7 @@ void Parser::parseInput() {
                     heap.push(score, cars[i]);
                 }
 
+                // calc time for heap build
                 auto heapBuildEndTime = std::chrono::high_resolution_clock::now();
                 std::chrono::duration<double> heapBuildElapsedTime = heapBuildEndTime - heapBuildStartTime;
 
