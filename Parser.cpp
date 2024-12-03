@@ -91,7 +91,7 @@ void Parser::parseInput() {
                 break;
             }
             case 2: {
-                cout << "Building heap of cars..." << endl;
+                cout << "Building min heap of cars..." << endl;
                 auto heapBuildStartTime = std::chrono::high_resolution_clock::now();
 
                 MinHeap heap;
@@ -106,8 +106,8 @@ void Parser::parseInput() {
                 auto heapBuildEndTime = std::chrono::high_resolution_clock::now();
                 std::chrono::duration<double> heapBuildElapsedTime = heapBuildEndTime - heapBuildStartTime;
 
-                std::cout << "Heap built successfully!" << std::endl;
-                std::cout << "Time taken to build heap: " << heapBuildElapsedTime.count() << " seconds\n" << std::endl;
+                std::cout << "Min heap built successfully!" << std::endl;
+                std::cout << "Time taken to build min heap: " << heapBuildElapsedTime.count() << " seconds\n" << std::endl;
                 std::cout << "Enter Brand (Volvo, Honda, Ford, etc): ";
                 std::cin.ignore(); // Clear the input buffer
                 std::getline(std::cin, inputCar.brand);
