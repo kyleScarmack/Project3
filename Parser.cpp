@@ -579,37 +579,6 @@ void Parser::parseInput() {
                 }
                 break;
             }
-
-//            case 3: {
-//                DSA::Map<int, Car> carMap;
-//
-//                for (int i = 0; i < numCars; ++i) {
-//                    carMap.insert(cars[i].id, cars[i]);
-//                }
-//
-//                int searchID;
-//                std::cout << "Enter the Car ID to search: ";
-//                std::cin >> searchID;
-//
-//                try {
-//                    auto startTime = std::chrono::high_resolution_clock::now();
-//                    Car foundCar = carMap.at(searchID);
-//                    auto endTime = std::chrono::high_resolution_clock::now();
-//
-//                    std::cout << "Car found! Here are the details:\n";
-//                    std::cout << "----------------------------------------\n";
-//                    foundCar.printCar();
-//                    std::cout << "----------------------------------------\n";
-//
-//                    std::chrono::duration<double> elapsed = endTime - startTime;
-//                    std::cout << "Search time: " << (elapsed.count() * 1000000) << " microseconds\n";
-//
-//                } catch (const std::out_of_range& e) {
-//                    std::cout << "Error: Car with ID " << searchID << " not found.\n";
-//                }
-//                break;
-//            }
-
             case 4:
                 cout << "Thank you for visiting Orange and Blue Auto! Goodbye!";
                 break;
