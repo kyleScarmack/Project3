@@ -37,120 +37,111 @@ void Parser::parseInput() {
     cout << "Hello and welcome to Orange and Blue Auto!" << endl;
     cout << endl;
 
-    cout << "Choose a search method: " << endl;
-    cout << "1. Merge Sort" << endl;
-    cout << "2. Min/Max Heap" << endl;
-    cout << "3. Map" << endl;
 
-    cout << endl;
-    cout << "Enter your choice (1-3): ";
+    int input = 0;
 
-    int input;
-    cin >> input;
-    cout << endl;
+    while (input != 4) {
+        cout << "Choose a search method: " << endl;
+        cout << "1. Merge Sort (Search by ID)" << endl;
+        cout << "2. Min Heap (Search for Closest Fit Car)" << endl;
+        cout << "3. Map (Implemented with Red-Black Tree)" << endl;
+        cout << "4. Quit" << endl;
 
-    switch (input) {
-        case 1: {
-            cout << "Sorting cars using merge sort..." << endl;
+        cout << endl;
+        cout << "Enter your choice (1-4): ";
+        cin >> input;
+        cout << endl;
 
-            auto mergeSortStartTime = chrono::high_resolution_clock::now();
+        switch (input) {
+            case 1: {
+                cout << "Sorting cars using merge sort..." << endl;
 
-            Kyle kyle;
-            kyle.mergeSort(cars, 0, numCars - 1);
+                auto mergeSortStartTime = chrono::high_resolution_clock::now();
 
-            auto mergeSortEndTime = chrono::high_resolution_clock::now();
-            chrono::duration<double> mergeSortElapsedTime = mergeSortEndTime - mergeSortStartTime;
+                Kyle kyle;
+                kyle.mergeSort(cars, 0, numCars - 1);
 
-            cout << "Cars sorted successfully!" << endl;
-            cout << "Time taken to merge sort: " << mergeSortElapsedTime.count() << " seconds" << endl;
+                auto mergeSortEndTime = chrono::high_resolution_clock::now();
+                chrono::duration<double> mergeSortElapsedTime = mergeSortEndTime - mergeSortStartTime;
 
-            cout << endl;
-            cout << "Enter the car ID to search: ";
-            int searchID;
-            cin >> searchID;
-            cout << endl;
+                cout << "Cars sorted successfully!" << endl;
+                cout << "Time taken to merge sort: " << mergeSortElapsedTime.count() << " seconds" << endl;
 
-            if (searchID > 0 && searchID <= numCars) {
-                cout << "Car found! Here is your car!" << endl;
-                cout << "----------------------------------------" << endl;
-                auto searchStartTime = chrono::high_resolution_clock::now();
-                Car foundCar = cars[searchID - 1];
-                auto searchEndTime = chrono::high_resolution_clock::now();
-                chrono::duration<double> searchElapsedTime = searchEndTime - searchStartTime;
-                foundCar.printCar();
-                cout << "----------------------------------------" << endl;
-                cout << "Time taken to access car: " << (searchElapsedTime.count() * 1000000) << " seconds" << endl;
-            } else {
-                cout << "Car with ID " << searchID << " not found in the dealership." << endl;
+                cout << endl;
+                cout << "Enter the car ID to search: ";
+                int searchID;
+                cin >> searchID;
+                cout << endl;
+
+                if (searchID > 0 && searchID <= numCars) {
+                    cout << "Car found! Here is your car!" << endl;
+                    cout << "----------------------------------------" << endl;
+                    auto searchStartTime = chrono::high_resolution_clock::now();
+                    Car foundCar = cars[searchID - 1];
+                    auto searchEndTime = chrono::high_resolution_clock::now();
+                    chrono::duration<double> searchElapsedTime = searchEndTime - searchStartTime;
+                    foundCar.printCar();
+                    cout << "----------------------------------------" << endl;
+                    // Multiply by 10^6 as  result is in microseconds
+                    cout << "Time taken to find car: " << (searchElapsedTime.count() * 1000000) << " microseconds" << endl;
+                } else {
+                    cout << "Car with ID " << searchID << " not found!" << endl;
+                }
+                break;
             }
-            break;
-        }
-        // case 2, min heap
-        case 2: {
-            // print case 2 selection (minheap)
-            cout << "Using MinHeap to search by ID..." << endl;
+            case 2: {
+                Car inputCar;
+                std::cout << "Enter Brand (Volvo, Honda, Ford, etc): ";
+                std::cin.ignore(); // Clear the input buffer
+                std::getline(std::cin, inputCar.brand);
+                std::cout << "Enter Model (Generic Model #1-3, Pilot, Mustang, etc): ";
+                std::getline(std::cin, inputCar.model);
+                std::cout << "Enter Year (1999, 2005, etc): ";
+                std::cin >> inputCar.year;
+                std::cout << "Enter Color (White, Blue, etc): ";
+                std::cin.ignore();
+                std::getline(std::cin, inputCar.color);
+                std::cout << "Enter Mileage (80123, 112908, etc): ";
+                std::cin >> inputCar.mileage;
+                std::cout << "Enter Price (12999, 30123, etc): $";
+                std::cin >> inputCar.price;
+                std::cout << "Enter Condition (Excellent, Good, Fair, etc): ";
+                std::cin.ignore(); std::getline(std::cin, inputCar.condition);
 
-            // declare minheap object
-            MinHeap minHeap;
+                auto start = std::chrono::high_resolution_clock::now();
+                MinHeap heap;
 
-            // measure time to build the heap
-            auto buildStartTime = chrono::high_resolution_clock::now();
-            for (int i = 0; i < numCars; i++) {
-                minHeap.insert(cars[i]);
+                // Calculate closeness for all cars and push them into the MinHeap
+                for (int i = 0; i < numCars; ++i) {
+                    float score = calculateCloseness(inputCar, cars[i]);
+                    heap.push(score, cars[i]);
+                }
+
+                Car closestCar = heap.pop();
+                auto end = std::chrono::high_resolution_clock::now();
+
+                std::chrono::duration<double> elapsed = end - start;
+
+                // Print the details of the closest car
+                std::cout << "\nHere is the closest car to your preferences!\n";
+                std::cout << "----------------------------------------\n";
+                closestCar.printCar();
+                std::cout << "----------------------------------------\n";
+                std::cout << "Execution time: " << elapsed.count() << " seconds\n";
+                break;
             }
-            auto buildEndTime = chrono::high_resolution_clock::now();
-            chrono::duration<double> buildTime = buildEndTime - buildStartTime;
-
-            // print build, time, followed by enter ID
-            cout << "MinHeap built successfully!" << endl;
-            cout << "Time taken to build the heap: " << buildTime.count() << " seconds" << endl;
-            cout << endl;
-            // pick num 1-100,000
-            cout << "Pick number 1 - 100,000 !!!" << endl;
-            cout << "Enter the car ID to search: ";
-
-            // get ID input
-            int searchID;
-            cin >> searchID;
-            cout << endl;
-
-            // declare car object
-            Car foundCar;
-
-            // measure time to search in the heap
-            // added repetitions to record average for more accurate search
-            // can remove though
-            int repetitions = 1000;
-            auto searchStartTime = chrono::high_resolution_clock::now();
-            for (int i = 0; i < repetitions; i++) {
-                minHeap.searchByID(searchID, foundCar);
-            }
-            auto searchEndTime = chrono::high_resolution_clock::now();
-            chrono::duration<double, std::micro> searchTime = searchEndTime - searchStartTime;
-
-            // take average, in microseconds for increased readability
-            double averageSearchTime = searchTime.count() / repetitions;
-
-            if (minHeap.searchByID(searchID, foundCar)) {
-                cout << "Car found! Here is your car:" << endl;
-                cout << "----------------------------------------" << endl;
-                foundCar.printCar();
-                cout << "----------------------------------------" << endl;
-            } else {
-                cout << "Car with ID " << searchID << " not found in the dealership." << endl;
-            }
-
-            cout << "Average time taken to search: " << averageSearchTime << " microseconds" << endl;
-
-            break;
+            case 3:
+                // Add functionality for map-based search
+                break;
+            case 4:
+                cout << "Thank you for visiting Orange and Blue Auto! Goodbye!";
+                break;
+            default:
+                cout << "Invalid choice. Please select a valid option (1-4)." << endl;
         }
 
-        default:
-            cout << "Invalid input. Please choose a valid option." << endl;
+        cout << endl;
     }
-            // add functions correlating to min/max heap output
-        // case 3:
-            // add functions correlating to map output
 
+    delete[] cars;
 }
-
