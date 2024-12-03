@@ -120,6 +120,7 @@ void Parser::parseInput() {
                 std::cin >> inputCar.mileage;
                 std::cout << "Enter Price (12999, 30123, etc): $";
                 std::cin >> inputCar.price;
+                // add new and used
                 std::cout << "Enter Condition (New or Used): ";
                 std::cin.ignore();
                 std::getline(std::cin, inputCar.condition);
