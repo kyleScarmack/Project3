@@ -91,6 +91,7 @@ void Parser::parseInput() {
                 break;
             }
             case 2: {
+                cout << "Building heap of cars..." << endl;
                 auto heapBuildStartTime = std::chrono::high_resolution_clock::now();
 
                 MinHeap heap;
@@ -117,7 +118,7 @@ void Parser::parseInput() {
                 std::cout << "Enter Color (White, Blue, etc): ";
                 std::cin.ignore();
                 std::getline(std::cin, inputCar.color);
-                std::cout << "Enter Mileage (2 199998): ";
+                std::cout << "Enter Mileage (2 - 199998): ";
                 std::cin >> inputCar.mileage;
                 std::cout << "Enter Price (5000 - 80000): $";
                 std::cin >> inputCar.price;
@@ -142,24 +143,24 @@ void Parser::parseInput() {
                 std::cout << "----------------------------------------\n";
                 closestCar.printCar();
                 std::cout << "----------------------------------------\n";
-                std::cout << "Execution time: " << elapsed.count() << " seconds\n";
+                std::cout << "Time taken to find car: " << elapsed.count() << " seconds\n";
                 break;
             }
 
             case 3: {
 
-                std::cout << "Select A Category To Search By: \n";
-                std::cout << "----------------------------------------\n";
-                std::cout << "(1) - Id \n";
-                std::cout << "(2) - Brand \n";
-                std::cout << "(3) - Model \n";
-                std::cout << "(4) - Year \n";
-                std::cout << "(5) - Color \n";
-                std::cout << "(6) - Mileage \n";
-                std::cout << "(7) - Price \n";
-                std::cout << "(8) - Condition \n";
+                std::cout << "Select a category to search by: \n";
+                std::cout << "1. ID \n";
+                std::cout << "2. Brand \n";
+                std::cout << "3. Model \n";
+                std::cout << "4. Year \n";
+                std::cout << "5. Color \n";
+                std::cout << "6. Mileage \n";
+                std::cout << "7. Price \n";
+                std::cout << "8. Condition \n";
 
                 int choice;
+                std::cout << "\nEnter your choice (1-8): ";
                 std::cin >> choice;
 
                 if (choice == 1) {
@@ -433,7 +434,7 @@ void Parser::parseInput() {
                             if (count <= 10) {
                                 std::cout << "Car found! Here are the details:\n";
                                 std::cout << "----------------------------------------\n";
-                                it->second.printCar();
+                                it->second  .printCar();
                                 std::cout << "----------------------------------------\n";
                             }
                         }
