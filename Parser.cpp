@@ -96,7 +96,7 @@ void Parser::parseInput() {
                 MinHeap heap;
                 Car inputCar;
 
-
+                // init heap
                 for (int i = 0; i < numCars; ++i) {
                     float score = calculateCloseness(inputCar, cars[i]);
                     heap.push(score, cars[i]);
