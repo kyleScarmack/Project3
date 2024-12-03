@@ -94,9 +94,11 @@ void Parser::parseInput() {
                 auto heapBuildStartTime = std::chrono::high_resolution_clock::now();
 
                 MinHeap heap;
+                Car inputCar;
+
 
                 for (int i = 0; i < numCars; ++i) {
-                    float score = 0.0; // Initialize score to zero; scores will be calculated later
+                    float score = calculateCloseness(inputCar, cars[i]);
                     heap.push(score, cars[i]);
                 }
 
@@ -105,8 +107,6 @@ void Parser::parseInput() {
 
                 std::cout << "Heap built successfully!" << std::endl;
                 std::cout << "Time taken to build heap: " << heapBuildElapsedTime.count() << " seconds\n" << std::endl;
-
-                Car inputCar;
                 std::cout << "Enter Brand (Volvo, Honda, Ford, etc): ";
                 std::cin.ignore(); // Clear the input buffer
                 std::getline(std::cin, inputCar.brand);
