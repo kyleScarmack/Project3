@@ -2,6 +2,7 @@
 #include "Car.h"
 #include "Kyle.h"
 #include "Brock.h"
+#include "map.hpp"
 #include <fstream>
 #include <sstream>
 #include <string>
@@ -83,7 +84,6 @@ void Parser::parseInput() {
                     chrono::duration<double> searchElapsedTime = searchEndTime - searchStartTime;
                     foundCar.printCar();
                     cout << "----------------------------------------" << endl;
-                    // Multiply by 10^6 as  result is in microseconds
                     cout << "Time taken to find car: " << (searchElapsedTime.count() * 1000000) << " microseconds" << endl;
                 } else {
                     cout << "Car with ID " << searchID << " not found!" << endl;
@@ -91,6 +91,21 @@ void Parser::parseInput() {
                 break;
             }
             case 2: {
+                auto heapBuildStartTime = std::chrono::high_resolution_clock::now();
+
+                MinHeap heap;
+
+                for (int i = 0; i < numCars; ++i) {
+                    float score = 0.0; // Initialize score to zero; scores will be calculated later
+                    heap.push(score, cars[i]);
+                }
+
+                auto heapBuildEndTime = std::chrono::high_resolution_clock::now();
+                std::chrono::duration<double> heapBuildElapsedTime = heapBuildEndTime - heapBuildStartTime;
+
+                std::cout << "Heap built successfully!" << std::endl;
+                std::cout << "Time taken to build heap: " << heapBuildElapsedTime.count() << " seconds\n" << std::endl;
+
                 Car inputCar;
                 std::cout << "Enter Brand (Volvo, Honda, Ford, etc): ";
                 std::cin.ignore(); // Clear the input buffer
@@ -108,12 +123,11 @@ void Parser::parseInput() {
                 std::cin >> inputCar.price;
                 // add new and used
                 std::cout << "Enter Condition (New or Used): ";
-                std::cin.ignore(); std::getline(std::cin, inputCar.condition);
+                std::cin.ignore();
+                std::getline(std::cin, inputCar.condition);
 
                 auto start = std::chrono::high_resolution_clock::now();
-                MinHeap heap;
 
-                // Calculate closeness for all cars and push them into the MinHeap
                 for (int i = 0; i < numCars; ++i) {
                     float score = calculateCloseness(inputCar, cars[i]);
                     heap.push(score, cars[i]);
@@ -124,7 +138,6 @@ void Parser::parseInput() {
 
                 std::chrono::duration<double> elapsed = end - start;
 
-                // Print the details of the closest car
                 std::cout << "\nHere is the closest car to your preferences!\n";
                 std::cout << "----------------------------------------\n";
                 closestCar.printCar();
@@ -483,6 +496,37 @@ void Parser::parseInput() {
                 }
                 break;
             }
+
+//            case 3: {
+//                DSA::Map<int, Car> carMap;
+//
+//                for (int i = 0; i < numCars; ++i) {
+//                    carMap.insert(cars[i].id, cars[i]);
+//                }
+//
+//                int searchID;
+//                std::cout << "Enter the Car ID to search: ";
+//                std::cin >> searchID;
+//
+//                try {
+//                    auto startTime = std::chrono::high_resolution_clock::now();
+//                    Car foundCar = carMap.at(searchID);
+//                    auto endTime = std::chrono::high_resolution_clock::now();
+//
+//                    std::cout << "Car found! Here are the details:\n";
+//                    std::cout << "----------------------------------------\n";
+//                    foundCar.printCar();
+//                    std::cout << "----------------------------------------\n";
+//
+//                    std::chrono::duration<double> elapsed = endTime - startTime;
+//                    std::cout << "Search time: " << (elapsed.count() * 1000000) << " microseconds\n";
+//
+//                } catch (const std::out_of_range& e) {
+//                    std::cout << "Error: Car with ID " << searchID << " not found.\n";
+//                }
+//                break;
+//            }
+
             case 4:
                 cout << "Thank you for visiting Orange and Blue Auto! Goodbye!";
                 break;
