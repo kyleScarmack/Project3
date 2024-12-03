@@ -111,14 +111,14 @@ void Parser::parseInput() {
                 std::getline(std::cin, inputCar.brand);
                 std::cout << "Enter Model (Generic Model #1-3, Pilot, Mustang, etc): ";
                 std::getline(std::cin, inputCar.model);
-                std::cout << "Enter Year (1999, 2005, etc): ";
+                std::cout << "Enter Year (1990 - 2022): ";
                 std::cin >> inputCar.year;
                 std::cout << "Enter Color (White, Blue, etc): ";
                 std::cin.ignore();
                 std::getline(std::cin, inputCar.color);
-                std::cout << "Enter Mileage (80123, 112908, etc): ";
+                std::cout << "Enter Mileage (2 199998): ";
                 std::cin >> inputCar.mileage;
-                std::cout << "Enter Price (12999, 30123, etc): $";
+                std::cout << "Enter Price (5000 - 80000): $";
                 std::cin >> inputCar.price;
                 // add new and used
                 std::cout << "Enter Condition (New or Used): ";
