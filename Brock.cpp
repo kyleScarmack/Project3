@@ -32,12 +32,25 @@ void MinHeap::heapifyDown(int index) {
 }
 
 float calculateCloseness(const Car& inputCar, const Car& car) {
-    const float yearWeight = 0.1f;
+    // define weights for different attributes
+    const float brandMismatchPenalty = 10000.0f;
+    const float modelMismatchPenalty = 5000.0f;
+    const float yearMismatchPenalty = 1000.0f;
     const float mileageWeight = 0.2f;
     const float priceWeight = 0.2f;
 
     float score = 0.0f;
-    score += yearWeight * std::abs(inputCar.year - car.year);
+
+    // penalize heavily for mismatches in brand, model, and year
+    if (inputCar.brand != car.brand) {
+        score += brandMismatchPenalty;
+    }
+    if (inputCar.model != car.model) {
+        score += modelMismatchPenalty;
+    }
+    score += yearMismatchPenalty * std::abs(inputCar.year - car.year);
+
+    // add smaller penalties for differences in price and mileage
     score += mileageWeight * std::abs(inputCar.mileage - car.mileage);
     score += priceWeight * std::abs(inputCar.price - car.price);
 

@@ -105,6 +105,8 @@ void Parser::parseInput() {
                 std::cin >> inputCar.mileage;
                 std::cout << "Enter Price (12999, 30123, etc): $";
                 std::cin >> inputCar.price;
+                std::cout << "Enter Condition (Excellent, Good, Fair, etc): ";
+                std::cin.ignore(); std::getline(std::cin, inputCar.condition);
 
                 auto start = std::chrono::high_resolution_clock::now();
                 MinHeap heap;
