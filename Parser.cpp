@@ -70,7 +70,7 @@ void Parser::parseInput() {
                 cout << "Time taken to merge sort: " << mergeSortElapsedTime.count() << " seconds" << endl;
 
                 cout << endl;
-                cout << "Enter the car ID to search: ";
+                cout << "Enter the car ID to search (1 - 100000): ";
                 int searchID;
                 cin >> searchID;
                 cout << endl;
