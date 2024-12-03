@@ -165,32 +165,32 @@ void Parser::parseInput() {
 
                 if (choice == 1) {
 
-                    std::cout << "Enter the Car ID to Search: ";
+                    std::cout << "Enter the car ID to search: ";
                     int searchID;
                     std::cin >> searchID;
 
                     try {
                         auto startTime = std::chrono::high_resolution_clock::now();
 
-                        std::cout << "Creating Map..." << std::endl;
+                        std::cout << "Creating map..." << std::endl;
 
                         DSA::Map<int, Car> carMap;
                         for (int i = 0; i < numCars; ++i) {
                             carMap.insert(cars[i].id, cars[i]);
                         }
 
-                        std::cout << "Success! Map Created!" << std::endl;
+                        std::cout << "Success! Map created!" << std::endl;
 
                         Car foundCar = carMap.at(searchID);
                         auto endTime = std::chrono::high_resolution_clock::now();
 
-                        std::cout << "Car found! Here are the details:\n";
+                        std::cout << "Car found! Here is your car!\n";
                         std::cout << "----------------------------------------\n";
                         foundCar.printCar();
                         std::cout << "----------------------------------------\n";
 
                         std::chrono::duration<double> elapsed = endTime - startTime;
-                        std::cout << "Search time: " << (elapsed.count() * 1000000) << " microseconds\n";
+                        std::cout << "Search time: " << elapsed.count() << " seconds\n";
 
                     } catch (const std::out_of_range& e) {
                         std::cout << "Error: Car with ID " << searchID << " not found.\n";
@@ -237,7 +237,7 @@ void Parser::parseInput() {
                     auto endTime = std::chrono::high_resolution_clock::now();
 
                     std::chrono::duration<double> elapsed = endTime - startTime;
-                    std::cout << "Search time: " << (elapsed.count() * 1000000) << " microseconds\n";
+                    std::cout << "Search time: " << elapsed.count() << " seconds\n";
 
                 }
                 else if (choice == 3) {
@@ -280,7 +280,7 @@ void Parser::parseInput() {
                     auto endTime = std::chrono::high_resolution_clock::now();
 
                     std::chrono::duration<double> elapsed = endTime - startTime;
-                    std::cout << "Search time: " << (elapsed.count() * 1000000) << " microseconds\n";
+                    std::cout << "Search time: " << elapsed.count() << " seconds\n";
                 }
                 else if (choice == 4) {
                     std::cout << "Enter the Year to Search: ";
@@ -322,7 +322,7 @@ void Parser::parseInput() {
                     auto endTime = std::chrono::high_resolution_clock::now();
 
                     std::chrono::duration<double> elapsed = endTime - startTime;
-                    std::cout << "Search time: " << (elapsed.count() * 1000000) << " microseconds\n";
+                    std::cout << "Search time: " << elapsed.count() << " seconds\n";
                 }
                 else if (choice == 5) {
                     std::cout << "Enter the Color to Search: ";
@@ -364,7 +364,7 @@ void Parser::parseInput() {
                     auto endTime = std::chrono::high_resolution_clock::now();
 
                     std::chrono::duration<double> elapsed = endTime - startTime;
-                    std::cout << "Search time: " << (elapsed.count() * 1000000) << " microseconds\n";
+                    std::cout << "Search time: " << elapsed.count() << " seconds\n";
                 }
                 else if (choice == 6) {
                     std::cout << "Enter the Mileage to Search: ";
@@ -406,7 +406,7 @@ void Parser::parseInput() {
                     auto endTime = std::chrono::high_resolution_clock::now();
 
                     std::chrono::duration<double> elapsed = endTime - startTime;
-                    std::cout << "Search time: " << (elapsed.count() * 1000000) << " microseconds\n";
+                    std::cout << "Search time: " << elapsed.count() << " seconds\n";
                 }
                 else if (choice == 7) {
                     std::cout << "Enter the Price to Search: ";
@@ -448,7 +448,7 @@ void Parser::parseInput() {
                     auto endTime = std::chrono::high_resolution_clock::now();
 
                     std::chrono::duration<double> elapsed = endTime - startTime;
-                    std::cout << "Search time: " << (elapsed.count() * 1000000) << " microseconds\n";
+                    std::cout << "Search time: " << elapsed.count() << " seconds\n";
                 }
                 else if (choice == 8) {
                     std::cout << "Enter the Condition to Search (New/Old): ";
@@ -490,7 +490,7 @@ void Parser::parseInput() {
                     auto endTime = std::chrono::high_resolution_clock::now();
 
                     std::chrono::duration<double> elapsed = endTime - startTime;
-                    std::cout << "Search time: " << (elapsed.count() * 1000000) << " microseconds\n";
+                    std::cout << "Search time: " << elapsed.count() << " seconds\n";
                 }
                 else {
                     std::cout << "Invalid Option. Please Try Again." << std::endl;
