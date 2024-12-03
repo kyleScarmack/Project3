@@ -34,7 +34,7 @@ int Parser::readCSV(const string& fileName, Car cars[]) {
 
 void Parser::parseInput() {
     Car* cars = new Car[100000];
-    int numCars = readCSV("Car_data.csv", cars);
+    int numCars = readCSV("Car_Data.csv", cars);
 
     cout << "Hello and welcome to Orange and Blue Auto!" << endl;
     cout << endl;
@@ -164,7 +164,7 @@ void Parser::parseInput() {
 
                 if (choice == 1) {
 
-                    std::cout << "Enter the Car ID to Search: ";
+                    std::cout << "Enter the Car ID to Search: \n";
                     int searchID;
                     std::cin >> searchID;
 
@@ -178,7 +178,7 @@ void Parser::parseInput() {
                             carMap.insert(cars[i].id, cars[i]);
                         }
 
-                        std::cout << "Success! Map Created!" << std::endl;
+                        std::cout << "Success! Map Created!\n\n";
 
                         Car foundCar = carMap.at(searchID);
                         auto endTime = std::chrono::high_resolution_clock::now();
@@ -189,10 +189,12 @@ void Parser::parseInput() {
                         std::cout << "----------------------------------------\n";
 
                         std::chrono::duration<double> elapsed = endTime - startTime;
-                        std::cout << "Search time: " << (elapsed.count() * 1000000) << " microseconds\n";
+                        std::cout << "Search time: " << elapsed.count() << " seconds\n";
 
                     } catch (const std::out_of_range& e) {
                         std::cout << "Error: Car with ID " << searchID << " not found.\n";
+                    } catch (const std::exception& e) {
+                        std::cerr << "Unexpected Error: " << e.what() << "\n";
                     }
 
                 }
@@ -203,6 +205,17 @@ void Parser::parseInput() {
                     std::cin >> searchBrand;
                     int count = 0;
 
+                    if (searchBrand.length() > 0)
+                        searchBrand[0] = std::toupper(searchBrand[0]);
+
+                    try {
+                        int test = std::stoi(searchBrand);
+                        std::cout << "Invalid Choice. Please Try Again.\n\n";
+                        break;
+                    } catch (std::invalid_argument& e) {
+
+                    }
+
                     auto startTime = std::chrono::high_resolution_clock::now();
 
                     std::cout << "Creating Map..." << std::endl;
@@ -212,7 +225,7 @@ void Parser::parseInput() {
                         carMap.insert(cars[i].id, cars[i]);
                     }
 
-                    std::cout << "Success! Map Created!" << std::endl;
+                    std::cout << "Success! Map Created!\n\n";
 
                     DSA::Map<int, Car>::Iterator it;
                     for (it= carMap.begin(); it != carMap.end(); ++it)
@@ -231,12 +244,12 @@ void Parser::parseInput() {
                     if (count == 0)
                         std::cout << "No Cars Match Your Request: " << searchBrand << std::endl;
                     else if (count > 10)
-                        std::cout << "Plus: " << count - 10 << " Results!" << std::endl;
+                        std::cout << "Additional Results Not Listed: " << count - 10 << "\n";
 
                     auto endTime = std::chrono::high_resolution_clock::now();
 
                     std::chrono::duration<double> elapsed = endTime - startTime;
-                    std::cout << "Search time: " << (elapsed.count() * 1000000) << " microseconds\n";
+                    std::cout << "Time Taken to Search For Cars: " << elapsed.count() << " seconds\n";
 
                 }
                 else if (choice == 3) {
@@ -245,6 +258,17 @@ void Parser::parseInput() {
                     std::string searchModel;
                     std::cin >> searchModel;
                     int count = 0;
+
+                    if (searchModel.length() > 0)
+                        searchModel[0] = std::toupper(searchModel[0]);
+
+                    try {
+                        int test = std::stoi(searchModel);
+                        std::cout << "Invalid Choice. Please Try Again.\n\n";
+                        break;
+                    } catch (std::invalid_argument& e) {
+
+                    }
 
                     auto startTime = std::chrono::high_resolution_clock::now();
 
@@ -255,7 +279,7 @@ void Parser::parseInput() {
                         carMap.insert(cars[i].id, cars[i]);
                     }
 
-                    std::cout << "Success! Map Created!" << std::endl;
+                    std::cout << "Success! Map Created!\n\n";
 
                     DSA::Map<int, Car>::Iterator it;
                     for (it= carMap.begin(); it != carMap.end(); ++it)
@@ -274,19 +298,29 @@ void Parser::parseInput() {
                     if (count == 0)
                         std::cout << "No Cars Match Your Request: " << searchModel << std::endl;
                     else if (count > 10)
-                        std::cout << "Plus: " << count - 10 << " Results!" << std::endl;
+                        std::cout << "Additional Results Not Listed: " << count - 10 << "\n";
 
                     auto endTime = std::chrono::high_resolution_clock::now();
 
                     std::chrono::duration<double> elapsed = endTime - startTime;
-                    std::cout << "Search time: " << (elapsed.count() * 1000000) << " microseconds\n";
+                    std::cout << "Time Taken to Search For Cars: " << elapsed.count() << " seconds\n";
+
                 }
                 else if (choice == 4) {
                     std::cout << "Enter the Year to Search: ";
 
+                    std::string searchYearString;
                     int searchYear;
-                    std::cin >> searchYear;
+                    std::cin >> searchYearString;
                     int count = 0;
+
+                    try {
+                        searchYear = std::stoi(searchYearString);
+                    }
+                    catch (std::invalid_argument& e) {
+                        std::cout << "Invalid Choice. Please Try Again.\n\n";
+                        break;
+                    }
 
                     auto startTime = std::chrono::high_resolution_clock::now();
 
@@ -297,7 +331,7 @@ void Parser::parseInput() {
                         carMap.insert(cars[i].id, cars[i]);
                     }
 
-                    std::cout << "Success! Map Created!" << std::endl;
+                    std::cout << "Success! Map Created!\n\n";
 
                     DSA::Map<int, Car>::Iterator it;
                     for (it= carMap.begin(); it != carMap.end(); ++it)
@@ -316,12 +350,12 @@ void Parser::parseInput() {
                     if (count == 0)
                         std::cout << "No Cars Match Your Request: " << searchYear << std::endl;
                     else if (count > 10)
-                        std::cout << "Plus: " << count - 10 << " Results!" << std::endl;
+                        std::cout << "Additional Results Not Listed: " << count - 10 << "\n";
 
                     auto endTime = std::chrono::high_resolution_clock::now();
 
                     std::chrono::duration<double> elapsed = endTime - startTime;
-                    std::cout << "Search time: " << (elapsed.count() * 1000000) << " microseconds\n";
+                    std::cout << "Time Taken to Search For Cars: " << elapsed.count() << " seconds\n";
                 }
                 else if (choice == 5) {
                     std::cout << "Enter the Color to Search: ";
@@ -329,6 +363,17 @@ void Parser::parseInput() {
                     std::string searchColor;
                     std::cin >> searchColor;
                     int count = 0;
+
+                    if (searchColor.length() > 0)
+                        searchColor[0] = std::toupper(searchColor[0]);
+
+                    try {
+                        int test = std::stoi(searchColor);
+                        std::cout << "Invalid Choice. Please Try Again.\n\n";
+                        break;
+                    } catch (std::invalid_argument& e) {
+
+                    }
 
                     auto startTime = std::chrono::high_resolution_clock::now();
 
@@ -339,7 +384,7 @@ void Parser::parseInput() {
                         carMap.insert(cars[i].id, cars[i]);
                     }
 
-                    std::cout << "Success! Map Created!" << std::endl;
+                    std::cout << "Success! Map Created!\n\n";
 
                     DSA::Map<int, Car>::Iterator it;
                     for (it= carMap.begin(); it != carMap.end(); ++it)
@@ -358,19 +403,28 @@ void Parser::parseInput() {
                     if (count == 0)
                         std::cout << "No Cars Match Your Request: " << searchColor << std::endl;
                     else if (count > 10)
-                        std::cout << "Plus: " << count - 10 << " Results!" << std::endl;
+                        std::cout << "Additional Results Not Listed: " << count - 10 << "\n";
 
                     auto endTime = std::chrono::high_resolution_clock::now();
 
                     std::chrono::duration<double> elapsed = endTime - startTime;
-                    std::cout << "Search time: " << (elapsed.count() * 1000000) << " microseconds\n";
+                    std::cout << "Time Taken to Search For Cars: " << elapsed.count() << " seconds\n";
                 }
                 else if (choice == 6) {
                     std::cout << "Enter the Mileage to Search: ";
 
+                    std::string searchMileageString;
                     int searchMileage;
-                    std::cin >> searchMileage;
+                    std::cin >> searchMileageString;
                     int count = 0;
+
+                    try {
+                        searchMileage = std::stoi(searchMileageString);
+                    }
+                    catch (std::invalid_argument& e) {
+                        std::cout << "Invalid Choice. Please Try Again.\n\n";
+                        break;
+                    }
 
                     auto startTime = std::chrono::high_resolution_clock::now();
 
@@ -381,7 +435,7 @@ void Parser::parseInput() {
                         carMap.insert(cars[i].id, cars[i]);
                     }
 
-                    std::cout << "Success! Map Created!" << std::endl;
+                    std::cout << "Success! Map Created!\n\n";
 
                     DSA::Map<int, Car>::Iterator it;
                     for (it= carMap.begin(); it != carMap.end(); ++it)
@@ -400,19 +454,28 @@ void Parser::parseInput() {
                     if (count == 0)
                         std::cout << "No Cars Match Your Request: " << searchMileage << std::endl;
                     else if (count > 10)
-                        std::cout << "Plus: " << count - 10 << " Results!" << std::endl;
+                        std::cout << "Additional Results Not Listed: " << count - 10 << "\n";
 
                     auto endTime = std::chrono::high_resolution_clock::now();
 
                     std::chrono::duration<double> elapsed = endTime - startTime;
-                    std::cout << "Search time: " << (elapsed.count() * 1000000) << " microseconds\n";
+                    std::cout << "Time Taken to Search For Cars: " << elapsed.count() << " seconds\n";
                 }
                 else if (choice == 7) {
                     std::cout << "Enter the Price to Search: ";
 
+                    std::string searchPriceString;
                     int searchPrice;
-                    std::cin >> searchPrice;
+                    std::cin >> searchPriceString;
                     int count = 0;
+
+                    try {
+                        searchPrice = std::stoi(searchPriceString);
+                    }
+                    catch (std::invalid_argument& e) {
+                        std::cout << "Invalid Choice. Please Try Again.\n\n";
+                        break;
+                    }
 
                     auto startTime = std::chrono::high_resolution_clock::now();
 
@@ -423,7 +486,7 @@ void Parser::parseInput() {
                         carMap.insert(cars[i].id, cars[i]);
                     }
 
-                    std::cout << "Success! Map Created!" << std::endl;
+                    std::cout << "Success! Map Created!\n";
 
                     DSA::Map<int, Car>::Iterator it;
                     for (it= carMap.begin(); it != carMap.end(); ++it)
@@ -442,12 +505,12 @@ void Parser::parseInput() {
                     if (count == 0)
                         std::cout << "No Cars Match Your Request: " << searchPrice << std::endl;
                     else if (count > 10)
-                        std::cout << "Plus: " << count - 10 << " Results!" << std::endl;
+                        std::cout << "Additional Results Not Listed: " << count - 10 << "\n";
 
                     auto endTime = std::chrono::high_resolution_clock::now();
 
                     std::chrono::duration<double> elapsed = endTime - startTime;
-                    std::cout << "Search time: " << (elapsed.count() * 1000000) << " microseconds\n";
+                    std::cout << "Time Taken to Search For Cars: " << elapsed.count() << " seconds\n";
                 }
                 else if (choice == 8) {
                     std::cout << "Enter the Condition to Search (New/Old): ";
@@ -455,6 +518,17 @@ void Parser::parseInput() {
                     std::string searchCondition;
                     std::cin >> searchCondition;
                     int count = 0;
+
+                    if (searchCondition.length() > 0)
+                        searchCondition[0] = std::toupper(searchCondition[0]);
+
+                    try {
+                        int test = std::stoi(searchCondition);
+                        std::cout << "Invalid Choice. Please Try Again.\n\n";
+                        break;
+                    } catch (std::invalid_argument& e) {
+
+                    }
 
                     auto startTime = std::chrono::high_resolution_clock::now();
 
@@ -465,7 +539,7 @@ void Parser::parseInput() {
                         carMap.insert(cars[i].id, cars[i]);
                     }
 
-                    std::cout << "Success! Map Created!" << std::endl;
+                    std::cout << "Success! Map Created!\n\n";
 
                     DSA::Map<int, Car>::Iterator it;
                     for (it= carMap.begin(); it != carMap.end(); ++it)
@@ -484,12 +558,12 @@ void Parser::parseInput() {
                     if (count == 0)
                         std::cout << "No Cars Match Your Request: " << searchCondition << std::endl;
                     else if (count > 10)
-                        std::cout << "Plus: " << count - 10 << " Results!" << std::endl;
+                        std::cout << "Additional Results Not Listed: " << count - 10 << "\n";
 
                     auto endTime = std::chrono::high_resolution_clock::now();
 
                     std::chrono::duration<double> elapsed = endTime - startTime;
-                    std::cout << "Search time: " << (elapsed.count() * 1000000) << " microseconds\n";
+                    std::cout << "Time Taken to Search For Cars: " << elapsed.count() << " seconds\n";
                 }
                 else {
                     std::cout << "Invalid Option. Please Try Again." << std::endl;

@@ -39,7 +39,7 @@ namespace DSA
             Color color;
 
             // Constructor For Node.
-            Node(Key_T k, Value_T v);
+            Node(const Key_T& k, const Value_T& v);
 
             // Determines If A Node Is Black.
             bool isBlack() const noexcept;
@@ -62,9 +62,9 @@ namespace DSA
         // Helper Function For Destructor; Aids In Post-Order Traversal.
         void DestructorHelper(Node *node);
         // Helper Function That Searches For And Returns The Node Of A Given Key.
-        Node* FindHelper(Node*& node, const Key_T& key) const;
+        Node* FindHelper(Node* node, const Key_T& key) const;
         // Helper Function For Insert Function.
-        void InsertHelper(Node*& nodeRoot, Node*& node, Node* parent);
+        bool InsertHelper(Node*& nodeRoot, Node*& node, Node* parent);
         // Performs A Left Rotation Around A Particular Node.
         void RotateLeft(Node* node);
         // Performs A Right Rotation Around A Particular Node.
