@@ -165,8 +165,7 @@ void Parser::parseInput() {
 
                 if (choice == 1) {
 
-                    std::cout << "Enter the Car ID to Search: \n";
-                    std::cout << "Enter the car ID to search: ";
+                    std::cout << "Enter the Car ID to Search: ";
                     int searchID;
                     std::cin >> searchID;
 
