@@ -17,7 +17,7 @@
 #define PRIVATE_MEMBER_METHOD private:
 
 #define PUBLIC_MEMBER_CLASS public:
-#define PRIVATE_MEMBER_CLASS private
+#define PRIVATE_MEMBER_CLASS private:
 
 #define BLACK nullptr
 
@@ -28,7 +28,7 @@ MAP_NAMESPACE_BEGIN
     template<typename Key_T, typename Value_T>
     class Map
     {
-    PRIVATE_MEMBER_CLASS:
+    PRIVATE_MEMBER_CLASS
         // Node Struct For Red-Black Tree.
         struct Node {
             // Colors for Red-Black Tree Node.
