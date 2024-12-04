@@ -568,7 +568,7 @@ void Parser::parseInput() {
 
                 // 7, search by price
                 else if (choice == 7) {
-                    std::cout << "Enter the Price to Search: ";
+                    std::cout << "Enter the Price to Search: $";
 
                     std::string searchPriceString;
                     int searchPrice;
@@ -609,7 +609,7 @@ void Parser::parseInput() {
                     }
 
                     if (count == 0)
-                        std::cout << "No Cars Match Your Request: " << searchPrice << std::endl;
+                        std::cout << "No Cars Match Your Request: $" << searchPrice << std::endl;
                     else if (count > 10)
                         std::cout << "Additional Results Not Listed: " << count - 10 << "\n";
 
