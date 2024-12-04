@@ -1,27 +1,28 @@
 #include "map.hpp"
 
 
-template<typename Key_T, typename Value_T>
+
+MAP_TEMPLATE_DECLARE
 DSA::Map<Key_T, Value_T>::Node::Node(const Key_T& k, const Value_T& v) :
 key(k), value(v), itHelper({k, v}),
 parent(nullptr), left(nullptr), right(nullptr), color(Red) {}
 
-template<typename Key_T, typename Value_T>
+MAP_TEMPLATE_DECLARE
 bool DSA::Map<Key_T, Value_T>::Node::isBlack() const noexcept {
     return this->color == Black;
 }
 
-template<typename Key_T, typename Value_T>
+MAP_TEMPLATE_DECLARE
 bool DSA::Map<Key_T, Value_T>::Node::isRed() const noexcept {
     return this->color == Red;
 }
 
-template<typename Key_T, typename Value_T>
+MAP_TEMPLATE_DECLARE
 typename DSA::Map<Key_T, Value_T>::Node* DSA::Map<Key_T, Value_T>::Node::getGrandparent() {
     return (this->parent != nullptr) ? this->parent->parent : nullptr;
 }
 
-template<typename Key_T, typename Value_T>
+MAP_TEMPLATE_DECLARE
 typename DSA::Map<Key_T, Value_T>::Node* DSA::Map<Key_T, Value_T>::Node::getUncle() {
     Node* grandparent = this->getGrandparent();
 
@@ -34,7 +35,7 @@ typename DSA::Map<Key_T, Value_T>::Node* DSA::Map<Key_T, Value_T>::Node::getUncl
         return grandparent->left;
 }
 
-template<typename Key_T, typename Value_T>
+MAP_TEMPLATE_DECLARE
 void DSA::Map<Key_T, Value_T>::DestructorHelper(typename DSA::Map<Key_T, Value_T>::Node* node) {
     if (node == nullptr)
         return;
@@ -43,7 +44,7 @@ void DSA::Map<Key_T, Value_T>::DestructorHelper(typename DSA::Map<Key_T, Value_T
     delete node;
 }
 
-template<typename Key_T, typename Value_T>
+MAP_TEMPLATE_DECLARE
 typename DSA::Map<Key_T, Value_T>::Node*
 DSA::Map<Key_T, Value_T>::FindHelper(typename DSA::Map<Key_T, Value_T>::Node* node, const Key_T& key) const {
     if (node == nullptr)
@@ -56,7 +57,7 @@ DSA::Map<Key_T, Value_T>::FindHelper(typename DSA::Map<Key_T, Value_T>::Node* no
         return FindHelper(node->right, key);
 }
 
-template<typename Key_T, typename Value_T>
+MAP_TEMPLATE_DECLARE
 bool DSA::Map<Key_T, Value_T>::InsertHelper(
         typename DSA::Map<Key_T, Value_T>::Node*& nodeRoot, typename DSA::Map<Key_T, Value_T>::Node*& node,
         typename DSA::Map<Key_T, Value_T>::Node* parent) {
@@ -77,7 +78,7 @@ bool DSA::Map<Key_T, Value_T>::InsertHelper(
     }
 }
 
-template<typename Key_T, typename Value_T>
+MAP_TEMPLATE_DECLARE
 void DSA::Map<Key_T, Value_T>::RotateLeft(typename DSA::Map<Key_T, Value_T>::Node *node) {
     if (node == nullptr || node->right == nullptr)
         return;
@@ -105,7 +106,7 @@ void DSA::Map<Key_T, Value_T>::RotateLeft(typename DSA::Map<Key_T, Value_T>::Nod
     node->parent = rightNode;
 }
 
-template<typename Key_T, typename Value_T>
+MAP_TEMPLATE_DECLARE
 void DSA::Map<Key_T, Value_T>::RotateRight(typename DSA::Map<Key_T, Value_T>::Node *node) {
     if (node == nullptr || node->left == nullptr)
         return;
@@ -133,7 +134,7 @@ void DSA::Map<Key_T, Value_T>::RotateRight(typename DSA::Map<Key_T, Value_T>::No
     node->parent = leftNode;
 }
 
-template<typename Key_T, typename Value_T>
+MAP_TEMPLATE_DECLARE
 void DSA::Map<Key_T, Value_T>::Balance(typename DSA::Map<Key_T, Value_T>::Node* node) {
     if (node == nullptr) {
         return;
@@ -176,41 +177,39 @@ void DSA::Map<Key_T, Value_T>::Balance(typename DSA::Map<Key_T, Value_T>::Node* 
     }
 }
 
-template<typename Key_T, typename Value_T>
+MAP_TEMPLATE_DECLARE
 DSA::Map<Key_T, Value_T>::Map() : root(nullptr), nodeCount(0) {}
 
-template<typename Key_T, typename Value_T>
+MAP_TEMPLATE_DECLARE
 DSA::Map<Key_T, Value_T>::~Map() { DestructorHelper(root); }
 
-template<typename Key_T, typename Value_T>
+MAP_TEMPLATE_DECLARE
 void DSA::Map<Key_T, Value_T>::clear() {
     DestructorHelper(root);
     root = nullptr;
     nodeCount = 0;
 }
 
-template<typename Key_T, typename Value_T>
+MAP_TEMPLATE_DECLARE
 bool DSA::Map<Key_T, Value_T>::isEmpty() const noexcept { return this->nodeCount == 0; }
 
-template<typename Key_T, typename Value_T>
+MAP_TEMPLATE_DECLARE
 size_t DSA::Map<Key_T, Value_T>::size() const noexcept { return this->nodeCount; }
 
-template<typename Key_T, typename Value_T>
+MAP_TEMPLATE_DECLARE
 size_t DSA::Map<Key_T, Value_T>::count(const Key_T& key)
 { return (FindHelper(root, key) != nullptr) ? 1 : 0; }
 
-template<typename Key_T, typename Value_T>
+MAP_TEMPLATE_DECLARE
 void DSA::Map<Key_T, Value_T>::insert(const Key_T& key, const Value_T& value) {
     Node* node = new Node(key, value);
     if (InsertHelper(root, node, nullptr)) {
         nodeCount++;
         Balance(node);
     }
-    else {
-    }
 }
 
-template<typename Key_T, typename Value_T>
+MAP_TEMPLATE_DECLARE
 Value_T& DSA::Map<Key_T, Value_T>::at(const Key_T& key) {
     Node* node = FindHelper(root, key);
     if (node == nullptr)
@@ -218,7 +217,7 @@ Value_T& DSA::Map<Key_T, Value_T>::at(const Key_T& key) {
     return node->value;
 }
 
-template<typename Key_T, typename Value_T>
+MAP_TEMPLATE_DECLARE
 void DSA::Map<Key_T, Value_T>::Iterator::getLeftNode(typename DSA::Map<Key_T, Value_T>::Node* node) {
     if (node == nullptr)
         return;
@@ -226,7 +225,7 @@ void DSA::Map<Key_T, Value_T>::Iterator::getLeftNode(typename DSA::Map<Key_T, Va
     getLeftNode(node->left);
 }
 
-template<typename Key_T, typename Value_T>
+MAP_TEMPLATE_DECLARE
 void DSA::Map<Key_T, Value_T>::Iterator::getRightNode() {
     if (!nodes.empty()) {
         currentNode = nodes.top();
@@ -239,45 +238,45 @@ void DSA::Map<Key_T, Value_T>::Iterator::getRightNode() {
     }
 }
 
-template<typename Key_T, typename Value_T>
+MAP_TEMPLATE_DECLARE
 DSA::Map<Key_T, Value_T>::Iterator::Iterator() : currentNode(nullptr) {}
 
-template<typename Key_T, typename Value_T>
+MAP_TEMPLATE_DECLARE
 DSA::Map<Key_T, Value_T>::Iterator::Iterator(typename DSA::Map<Key_T, Value_T>::Node* node) : currentNode(nullptr) {
     getLeftNode(node);
     getRightNode();
 }
 
-template<typename Key_T, typename Value_T>
+MAP_TEMPLATE_DECLARE
 std::pair<Key_T, Value_T>& DSA::Map<Key_T, Value_T>::Iterator::operator*() const { return currentNode->itHelper; }
 
-template<typename Key_T, typename Value_T>
+MAP_TEMPLATE_DECLARE
 std::pair<Key_T, Value_T>* DSA::Map<Key_T, Value_T>::Iterator::operator->() const { return &(currentNode->itHelper); }
 
-template<typename Key_T, typename Value_T>
+MAP_TEMPLATE_DECLARE
 typename DSA::Map<Key_T, Value_T>::Iterator& DSA::Map<Key_T, Value_T>::Iterator::operator++() {
     getRightNode();
     return *this;
 }
 
-template<typename Key_T, typename Value_T>
+MAP_TEMPLATE_DECLARE
 bool DSA::Map<Key_T, Value_T>::Iterator::operator==(const Iterator& other) const
 { return this->currentNode == other.currentNode; }
 
-template<typename Key_T, typename Value_T>
+MAP_TEMPLATE_DECLARE
 bool DSA::Map<Key_T, Value_T>::Iterator::operator!=(const Iterator& other) const
 { return this->currentNode != other.currentNode; }
 
-template<typename Key_T, typename Value_T>
+MAP_TEMPLATE_DECLARE
 typename DSA::Map<Key_T, Value_T>::Iterator DSA::Map<Key_T, Value_T>::find(const Key_T& key) {
     Node* node = FindHelper(root, key);
     return Iterator(node);
 }
 
-template<typename Key_T, typename Value_T>
+MAP_TEMPLATE_DECLARE
 typename DSA::Map<Key_T, Value_T>::Iterator DSA::Map<Key_T, Value_T>::begin() { return Iterator(root); }
 
-template<typename Key_T, typename Value_T>
+MAP_TEMPLATE_DECLARE
 typename DSA::Map<Key_T, Value_T>::Iterator DSA::Map<Key_T, Value_T>::end() { return Iterator(); }
 
 template class DSA::Map<int, int>;

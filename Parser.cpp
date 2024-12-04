@@ -9,7 +9,6 @@
 #include <chrono>
 #include "map.hpp"
 
-
 int Parser::readCSV(const string& fileName, Car cars[]) {
     ifstream file(fileName);
     string line;
@@ -38,7 +37,6 @@ void Parser::parseInput() {
 
     cout << "Hello and welcome to Orange and Blue Auto!" << endl;
     cout << endl;
-
 
     int input = 0;
 
@@ -146,7 +144,6 @@ void Parser::parseInput() {
                 std::cout << "Time taken to find car: " << elapsed.count() << " seconds\n";
                 break;
             }
-
             case 3: {
 
                 std::cout << "Select a category to search by: \n";

@@ -7,15 +7,28 @@
 #include <utility>
 #include "Car.h"
 
+#define MAP_NAMESPACE_BEGIN {
+#define MAP_NAMESPACE_END }
+
+#define PUBLIC_MEMBER_VAR public:
+#define PRIVATE_MEMBER_VAR private:
+
+#define PUBLIC_MEMBER_METHOD public:
+#define PRIVATE_MEMBER_METHOD private:
+
+#define PUBLIC_MEMBER_CLASS public:
+#define PRIVATE_MEMBER_CLASS private
+
 #define BLACK nullptr
 
 // Namespace For Project.
 namespace DSA
-{
+MAP_NAMESPACE_BEGIN
     // Map Class That Uses A Red-Black Tree Implementation.
     template<typename Key_T, typename Value_T>
-    class Map {
-    private:
+    class Map
+    {
+    PRIVATE_MEMBER_CLASS:
         // Node Struct For Red-Black Tree.
         struct Node {
             // Colors for Red-Black Tree Node.
@@ -52,13 +65,13 @@ namespace DSA
             Node* getUncle();
         };
 
-    private:
+    PRIVATE_MEMBER_VAR
         // Root Of The Red-Black Tree.
         Node* root;
         // Number Of Nodes In Red-Black Tree.
         size_t nodeCount;
 
-    private:
+    PRIVATE_MEMBER_METHOD
         // Helper Function For Destructor; Aids In Post-Order Traversal.
         void DestructorHelper(Node *node);
         // Helper Function That Searches For And Returns The Node Of A Given Key.
@@ -76,7 +89,7 @@ namespace DSA
          */
         void Balance(Node* node);
 
-    public:
+    PUBLIC_MEMBER_METHOD
         // Constructor For Map Class.
         Map();
         // Destructor For Map Class.
@@ -95,23 +108,23 @@ namespace DSA
         // Method That Returns The Value Of A Particular Key In The Map. Throws An Exception If Key Does Not Exist.
         Value_T& at(const Key_T& key);
 
-    public:
+    PUBLIC_MEMBER_CLASS
         // Iterator Class For Iterating Over The Red-Black Tree.
         class Iterator
         {
-        private:
+        PRIVATE_MEMBER_VAR
             // Current Node That The Iterator Is At.
             Node* currentNode;
             // Helper Stack For Depth-First Search.
             std::stack<Node*> nodes;
 
-        private:
+        PRIVATE_MEMBER_METHOD
             // Sets The Current Node To The Red-Black Tree's Leftmost Node.
             void getLeftNode(Node* node);
             // Sets The Current Node To The Red-Black Tree's Rightmost Node.
             void getRightNode();
 
-        public:
+        PUBLIC_MEMBER_METHOD
             // Default Constructor For Iterator Class.
             Iterator();
             // Parameterized Constructor For Iterator Class.
@@ -131,6 +144,7 @@ namespace DSA
             bool operator!=(const Iterator& other) const;
         };
 
+    PUBLIC_MEMBER_METHOD
         // Method That Returns An Iterator To A Node With A Particular Key.
         Iterator find(const Key_T& key);
         // Method That Returns An Iterator To The Front Of The Red-Black Tree.
@@ -138,6 +152,8 @@ namespace DSA
         // Method That Returns An Iterator To The End Of The Red-Black Tree.
         Iterator end();
     };
-}
+MAP_NAMESPACE_END
+
+#define MAP_TEMPLATE_DECLARE template<typename Key_T, typename Value_T>
 
 #endif // MAP_HPP
