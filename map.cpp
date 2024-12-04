@@ -1,7 +1,5 @@
 #include "map.hpp"
 
-
-
 MAP_TEMPLATE_DECLARE
 DSA::Map<Key_T, Value_T>::Node::Node(const Key_T& k, const Value_T& v) :
 key(k), value(v), itHelper({k, v}),

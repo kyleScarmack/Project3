@@ -5,7 +5,7 @@
 #include <vector>
 using namespace std;
 
-// Min-Heap class for closeness calculation
+// min heap class
 class MinHeap {
 private:
     std::vector<std::pair<float, Car>> heap;
@@ -15,10 +15,9 @@ private:
 public:
     void push(float score, Car car);
     Car pop();
-    bool isEmpty() const;
 };
 
-std::vector<Car> readCarsFromCSV(const std::string& filePath);
+// closeness function
 float calculateCloseness(const Car& inputCar, const Car& car);
 
 #endif //PROJECT3_BROCK_H
