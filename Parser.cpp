@@ -275,8 +275,6 @@ void Parser::parseInput() {
 
                         std::cout << "Success! Map Created!\n\n";
 
-                        std::cout << "Success! Map created!" << std::endl;
-
                         Car foundCar = carMap.at(searchID);
                         auto endTime = std::chrono::high_resolution_clock::now();
 
