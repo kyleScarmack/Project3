@@ -49,12 +49,37 @@ Let's explore the menu options below
 ```
 Sorting cars using merge sort...
 Cars sorted successfully!
-Time taken to merge sort: (number of seconds here, about 0.58) seconds
+Time taken to merge sort: (number of seconds here) seconds
 
 Enter the car ID to search:
 ```
-- Here, the user is able to select the car's ID, which ranges from `1 - 100,000`. Here is an example ID with the number `598`
+- Here, the user is able to select the car's ID, which ranges from `1 - 100,000`. Here is an example ID with the number `598`, followed by the program prompting for a menu choice again
 ```
+Car found! Here is your car!
+----------------------------------------
+ID: 598
+Brand: Subaru
+Model: Generic Model 2
+Year: 2007
+Color: Red
+Mileage: 153169 miles
+Price: $51728
+Condition: New
+----------------------------------------
+Time taken to find car: (number of microseconds) microseconds
+
+Choose a search method:
+1. Merge Sort (Search by ID)
+2. Min Heap (Search for Closest Fit Car)
+3. Map (Implemented with Red-Black Tree)
+4. Quit
+
+Enter your choice (1-4):
+```
+
+2. Min Heap
+- 
+
 
 ## Authors
 - Brock Gilman
